@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "telegm-erpapp",
-    "slug": "telegm-erpapp",
+    "slug": "telegm-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5f358e82-aa24-41a1-af5c-57881a4f6e94"
+      }
+    },
+    "owner": "dumabre"
   }
 }
