@@ -4,6 +4,7 @@ import { getStoredToken } from '../storage/tokenStorage'
 import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useAppContext } from '../context/AppContext'
+import SyncStorage from 'sync-storage'
 
 const url = baseURL
 
@@ -16,16 +17,11 @@ const config = {
   }
 }
 
-export const withAuthorization = async (requestConfig) => {
+export const withAuthorization = (requestConfig) => {
+  const token = getStoredToken()
 
-  await getStoredToken()
-    .then((token) => {
-      if (!token) return requestConfig
-      requestConfig.headers = { ...requestConfig.headers, Authorization: `Bearer ${token.accessToken}` }
-      return requestConfig
-    })
-    .catch((err) => console.log(err))
-
+  if (!token) return requestConfig
+  requestConfig.headers = { ...requestConfig.headers, Authorization: `Bearer ${token.accessToken}` }
   return requestConfig
 }
 

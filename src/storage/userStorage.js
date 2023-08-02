@@ -1,16 +1,16 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import SyncStorage from 'sync-storage'
 
-export const getStoredUser = async () => {
-  const storedUser = await AsyncStorage.getItem('tgm-user')
+export const getStoredUser = () => {
+  const storedUser = SyncStorage.get('tgm-user')
   return storedUser ? JSON.parse(storedUser) : null
 }
 
-export const setStoredUser = async (user) => {
-  await AsyncStorage.setItem('tgm-user', JSON.stringify(user))
+export const setStoredUser = (user) => {
+  SyncStorage.set('tgm-user', JSON.stringify(user))
 }
 
-export const clearStoredUser = async () => {
-  await AsyncStorage.removeItem('tgm-user')
+export const clearStoredUser = () => {
+  SyncStorage.remove('tgm-user')
 }
 
 export default {

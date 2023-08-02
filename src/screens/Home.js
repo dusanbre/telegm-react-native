@@ -1,14 +1,20 @@
 import { Button } from '@react-native-material/core'
 import { Text, View } from 'react-native'
-import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
+import { clearStoredToken } from '../storage/tokenStorage'
+import { clearStoredUser } from '../storage/userStorage'
+import { logout, useAuth } from '../components/auth/hooks/useAuth'
 
 const Home = () => {
-  const { logout } = useContext(AuthContext)
+  const { setToken } = useAuth()
 
   const handleLogout = () => {
     logout()
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => {
+        // clearStoredToken()
+        setToken(null)
+        clearStoredUser()
+      })
       .catch((err) => console.log(err))
   }
   return (

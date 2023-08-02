@@ -5,20 +5,17 @@ import Home from '../../screens/Home'
 import { clearStoredToken, getStoredToken } from '../../storage/tokenStorage'
 import { useEffect, useState } from 'react'
 import { clearStoredUser } from '../../storage/userStorage'
+import { useAuth } from '../auth/hooks/useAuth'
 
 const Stack = createNativeStackNavigator()
 
 const Navigation = () => {
-  const [token, setToken] = useState(null)
+  const { token, setToken } = useAuth()
 
   useEffect(() => {
-    // clearStoredToken()
-    // clearStoredUser()
+    console.log(token)
 
-    getStoredToken()
-      .then((token) => setToken(token))
-      .catch((err) => console.log(err))
-  }, [])
+  }, [token])
 
   return (
     <NavigationContainer>

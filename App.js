@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import Navigation from './src/components/common/Navigation'
-import { AuthProvider } from './src/context/AuthContext'
+import { AuthContextProvider } from './src/context/AuthContext'
 
 const App = () => {
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <Navigation />
-    </AuthProvider>
+    </AuthContextProvider>
   )
 }
 

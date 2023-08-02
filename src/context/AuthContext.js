@@ -1,27 +1,43 @@
-import { createContext } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import { axiosInstance, withAuthorization } from '../axios/axioInstance'
+import { clearStoredToken, getStoredToken, setStoredToken } from '../storage/tokenStorage'
 
-export const AuthContext = createContext()
+const storedToken = getStoredToken()
 
-export const AuthProvider = ({ children }) => {
-  const login = (data) => {
-    const axiosRsp = axiosInstance({
-      url: '/auth',
-      method: 'POST',
-      data
-    })
-    return axiosRsp
-  }
+export const AuthContextProvider = ({ children }) => {
+  const [token, setToken] = useState(storedToken)
 
-  const logout = () => {
-    const axiosRsp = axiosInstance(withAuthorization({
-      url: '/auth',
-      method: 'DELETE',
-    }))
-    return axiosRsp
-  }
+  const setNewToken = useCallback((newToken) => {
+    if (newToken) {
+      setStoredToken(newToken)
+      setToken(newToken)
+    } else {
+      clearStoredToken()
+      setToken(null)
+    }
+  }, [])
+
+  // const login = (data) => {
+  //   const axiosRsp = axiosInstance({
+  //     url: '/auth',
+  //     method: 'POST',
+  //     data
+  //   })
+  //   return axiosRsp
+  // }
+
+  // const logout = () => {
+  //   const axiosRsp = axiosInstance(withAuthorization({
+  //     url: '/auth',
+  //     method: 'DELETE',
+  //   }))
+  //   return axiosRsp
+  // }
+
 
   return (
-    <AuthContext.Provider value={{ login, logout }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ token, setToken: setNewToken }}>{children}</AuthContext.Provider>
   )
 }
+
+export const AuthContext = createContext()
