@@ -1,10 +1,11 @@
+import { useContext, useState } from 'react'
+import { login, useAuth } from '../components/auth/hooks/useAuth'
+import axios from 'axios'
+
 import { View } from 'react-native'
 import { Spacer, Box, TextInput, Button } from '@react-native-material/core'
-import form from '../styles/Form'
-import { useContext, useState } from 'react'
-import axios from 'axios'
+
 import { getStoredUser, setStoredUser } from '../storage/userStorage'
-import { login, useAuth } from '../components/auth/hooks/useAuth'
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')

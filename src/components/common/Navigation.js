@@ -6,16 +6,12 @@ import { clearStoredToken, getStoredToken } from '../../storage/tokenStorage'
 import { useEffect, useState } from 'react'
 import { clearStoredUser } from '../../storage/userStorage'
 import { useAuth } from '../auth/hooks/useAuth'
+import { View } from 'react-native'
 
 const Stack = createNativeStackNavigator()
 
 const Navigation = () => {
-  const { token, setToken } = useAuth()
-
-  useEffect(() => {
-    console.log(token)
-
-  }, [token])
+  const { token } = useAuth()
 
   return (
     <NavigationContainer>

@@ -1,27 +1,28 @@
-import { createContext, useContext } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { getStoredToken } from '../storage/tokenStorage'
-import { getStoredUser } from '../storage/userStorage'
+import { clearStoredUser, getStoredUser, setStoredUser } from '../storage/userStorage'
 
-export const AppContext = createContext()
+const storedUser = getStoredUser()
 
 export const AppContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(storedUser)
 
-  useEffect(() => {
-    getStoredToken()
-      .then((token) => setToken(token))
-      .catch((err) => console.log(err))
-
-    getStoredUser()
-      .then((user) => setUser(user))
-      .catch((err) => console.log(err))
+  const setNewUser = useCallback((newUser) => {
+    if (newUser) {
+      setStoredUser(newUser)
+      setUser(newUser)
+    } else {
+      clearStoredUser()
+      setUser(null)
+    }
   }, [])
 
   return (
-    <AppContext.Provider value={{ token, user }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ user, setUser: setNewUser }}>{children}</AppContext.Provider>
   )
 }
+
+export const AppContext = createContext()
 
 export const useAppContext = () => useContext(AppContext)
 
