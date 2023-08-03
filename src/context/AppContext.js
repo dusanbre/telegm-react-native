@@ -1,6 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { getStoredToken } from '../storage/tokenStorage'
 import { clearStoredUser, getStoredUser, setStoredUser } from '../storage/userStorage'
+import { sl } from 'date-fns/locale'
+import { setDefaultOptions } from 'date-fns'
+
+setDefaultOptions({ locale: sl })
 
 const storedUser = getStoredUser()
 

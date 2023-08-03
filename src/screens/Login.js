@@ -6,17 +6,20 @@ import { View } from 'react-native'
 import { Spacer, Box, TextInput, Button } from '@react-native-material/core'
 
 import { getStoredUser, setStoredUser } from '../storage/userStorage'
+import { useAppContext } from '../context/AppContext'
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { setToken } = useAuth()
+  const { setUser } = useAppContext()
 
   const handleLogin = () => {
     login({ email, password })
       .then(({ data }) => {
         setToken(data.token)
-        setStoredUser(data.user?.attributes)
+        setUser(data.user?.attributes)
+        navigation.navigate('Home')
       })
       .catch((err) => console.log(err))
   }

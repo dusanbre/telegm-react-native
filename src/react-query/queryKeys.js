@@ -1,3 +1,5 @@
 export default {
-  users: 'users'
+  users: 'users',
+  workLocations: 'workLocations',
+  workingDays: 'workingDays',
 }
