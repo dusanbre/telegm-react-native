@@ -9,7 +9,7 @@ import SyncStorage from 'sync-storage'
 const url = baseURL
 
 const config = {
-  baseURL: `${url}/api/v1`,
+  baseURL: `${url}/api/v1/mobile`,
   timeout: 180000,
   headers: {
     'Content-Type': 'application/json',

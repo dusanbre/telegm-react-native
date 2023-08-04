@@ -18,7 +18,7 @@ const headerOptions = {
       style={{ borderRadius: 5, backgroundColor: '#1A237E' }}
     />
   ),
-  headerStyle: { backgroundColor: '#ffffff' },
+  headerStyle: { backgroundColor: '#f5f5f5' },
   headerShadowVisible: false,
 }
 
@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator()
 const Navigation = () => {
   const { token } = useAuth()
   const navTheme = DefaultTheme
-  navTheme.colors.background = '#ffffff'
+  navTheme.colors.background = '#f5f5f5'
 
   return (
     <NavigationContainer theme={navTheme}>
